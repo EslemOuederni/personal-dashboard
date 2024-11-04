@@ -2189,14 +2189,17 @@ snapshots:
   'client@file:':
     dependencies:
       next: 15.0.2(react-dom@19.0.0-rc-02c0e824-20241028(react@19.0.0-rc-02c0e824-20241028))(react@19.0.0-rc-02c0e824-20241028)
+      next-auth: 4.24.10(next@15.0.2(react-dom@19.0.0-rc-02c0e824-20241028(react@19.0.0-rc-02c0e824-20241028))(react@19.0.0-rc-02c0e824-20241028))(react-dom@19.0.0-rc-02c0e824-20241028(react@19.0.0-rc-02c0e824-20241028))(react@19.0.0-rc-02c0e824-20241028)
       react: 19.0.0-rc-02c0e824-20241028
       react-dom: 19.0.0-rc-02c0e824-20241028(react@19.0.0-rc-02c0e824-20241028)
     transitivePeerDependencies:
+      - '@auth/core'
       - '@babel/core'
       - '@opentelemetry/api'
       - '@playwright/test'
       - babel-plugin-macros
       - babel-plugin-react-compiler
+      - nodemailer
       - sass
 
   color-convert@2.0.1:
