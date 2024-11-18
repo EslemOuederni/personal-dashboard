@@ -2,7 +2,7 @@ import "./globals.css";
 import { getServerSession } from "next-auth";
 import SessionProvider from "./components/SessionProvider";
 import { Metadata } from "next";
-import NavMenu from "./components/NavMenu";
+import { authOptions } from "./lib/auth";
 
 export const metadata: Metadata ={
   title: 'Personal Dashboard App',
@@ -15,15 +15,13 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const session = await getServerSession();
-
+  const session = await getServerSession(authOptions);
   return (
     <html lang="en">
       <body>
-       <SessionProvider session={session}>
-          <NavMenu />
-          {children}
-        </SessionProvider>
+          <SessionProvider session={session}>
+            {children}
+          </SessionProvider>
       </body>
     </html>
   );
