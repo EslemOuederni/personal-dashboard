@@ -1,9 +1,8 @@
 import mongoose from "mongoose";
-// const { MONGODB_URI } = process.env;
-const uri = "mongodb+srv://sousououederni:Eslem12++@personal-dashboard.bishk.mongodb.net/";
+const { MONGODB_URI } = process.env;
 export const connectDB = async () => {
   try {
-    const { connection } = await mongoose.connect(uri as string);
+    const { connection } = await mongoose.connect(MONGODB_URI as string);
     if (connection.readyState === 1) {
       return Promise.resolve(true);
     }
