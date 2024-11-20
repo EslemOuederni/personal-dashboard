@@ -1,13 +1,13 @@
 import { connectDB } from "@/app/lib/mongodb";
-import Project from "@/app/models/project";
-import { IProject } from "@/app/types/project";
+import Task from "@/app/models/task";
+import { ITask } from "@/app/types/task";
 import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
     await connectDB();
-    const projects = await Project.find();
-    return NextResponse.json(projects, { status: 200 });
+    const tasks = await Task.find();
+    return NextResponse.json(tasks, { status: 200 });
   } catch (error: any) {
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
@@ -16,10 +16,11 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     await connectDB();
-    const body: IProject = await req.json();
-    const project = await Project.create(body);
-    return NextResponse.json(project, { status: 201 });
+    const body: ITask = await req.json();
+    const task = await Task.create(body);
+    return NextResponse.json(task, { status: 201 });
   } catch (error: any) {
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }
+

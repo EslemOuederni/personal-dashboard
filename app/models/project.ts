@@ -1,5 +1,4 @@
-import { Schema } from "mongoose";
-import mongoose from "mongoose";
+import { Schema, model, models } from "mongoose";
 import { IProject } from "../types/project";
 
 const ProjectSchema = new Schema<IProject>({
@@ -11,9 +10,9 @@ const ProjectSchema = new Schema<IProject>({
     enum: ["not started", "in-progress", "completed"],
     default: "not started",
   },
-  tag: { type: String }, // For categorizing or tagging the project
-  tasks: [{ type: Schema.Types.ObjectId, ref: "Task" }], // Array of task IDs
+  tag: { type: String }, 
+  tasks: [{ type: Schema.Types.ObjectId, ref: "Task" }], 
 });
 
-const Project = mongoose.model<IProject>("Project", ProjectSchema);
+const Project = models.Project || model<IProject>("Project", ProjectSchema);
 export default Project;
