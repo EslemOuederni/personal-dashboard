@@ -1,4 +1,5 @@
 import { connectDB } from "@/app/lib/mongodb";
+import Project from "@/app/models/project";
 import Task from "@/app/models/task";
 import { ITask } from "@/app/types/task";
 import { NextResponse } from "next/server";
@@ -17,10 +18,35 @@ export async function POST(req: Request) {
   try {
     await connectDB();
     const body: ITask = await req.json();
+
+    if (!body.project) {
+      return NextResponse.json(
+        { message: "Project ID is required to create a task." },
+        { status: 400 }
+      );
+    }
+    
+
+    const project = await Project.findById(body.project);
+    if (!project) {
+      return NextResponse.json(
+        { message: "Project not found. Please provide a valid project ID." },
+        { status: 404 }
+      );
+    }
+
     const task = await Task.create(body);
+    project.tasks.push(task._id);
+    await project.save();
+
     return NextResponse.json(task, { status: 201 });
   } catch (error: any) {
-    return NextResponse.json({ message: error.message }, { status: 500 });
+    return NextResponse.json(
+      {
+        message: "An error occurred while creating the task.",
+        error: error.message,
+      },
+      { status: 500 }
+    );
   }
 }
-
