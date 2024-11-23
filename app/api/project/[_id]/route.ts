@@ -1,11 +1,11 @@
 import { connectDB } from "@/app/lib/mongodb";
 import Project from "@/app/models/project";
 import { IProject } from "@/app/types/project";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
 export async function GET(
-  req: Request,
-  { params }: { params: { _id: string } }
+  req: NextRequest,
+  { params} : { params: { _id: string } }
 ) {
   try {
     await connectDB();
@@ -20,7 +20,7 @@ export async function GET(
 }
 
 export async function PUT(
-  req: Request,
+  req: NextRequest,
   { params }: { params: { _id: string } }
 ) {
   try {
@@ -39,7 +39,7 @@ export async function PUT(
 }
 
 export async function DELETE(
-  req: Request,
+  req: NextRequest,
   { params }: { params: { _id: string } }
 ) {
   try {
