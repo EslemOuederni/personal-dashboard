@@ -5,11 +5,12 @@ import { NextResponse, NextRequest } from "next/server";
 
 export async function GET(
   req: NextRequest,
-  { params} : { params: { _id: string } }
+  { params} : { params:Promise<{ _id: string }>  }
 ) {
   try {
     await connectDB();
-    const projects = await Project.findById(params._id);
+    const {_id} = await params;
+    const projects = await Project.findById(_id);
     if (!projects) {
       return new Response("Project not found", { status: 404 });
     }
