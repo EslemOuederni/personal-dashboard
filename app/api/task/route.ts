@@ -1,12 +1,12 @@
-import { connectDB } from "@/app/lib/mongodb";
 import Project from "@/app/models/project";
 import Task from "@/app/models/task";
 import { ITask } from "@/app/types/task";
 import { NextResponse } from "next/server";
+import {db} from "@/app/lib/db";
 
 export async function GET() {
   try {
-    await connectDB();
+    await db();
     const tasks = await Task.find();
     return NextResponse.json(tasks, { status: 200 });
   } catch (error) {
@@ -16,7 +16,7 @@ export async function GET() {
 
 export async function POST(req: Request) {
   try {
-    await connectDB();
+    await db();
     const body: ITask = await req.json();
 
     if (!body.project) {
@@ -26,7 +26,6 @@ export async function POST(req: Request) {
       );
     }
     
-
     const project = await Project.findById(body.project);
     if (!project) {
       return NextResponse.json(

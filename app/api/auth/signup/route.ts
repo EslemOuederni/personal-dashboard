@@ -1,12 +1,11 @@
 import { NextResponse } from "next/server";
 import {hash} from "bcrypt";
-// import mongoose from "mongoose";
-import { connectDB } from "@/app/lib/mongodb";
 import User from "@/app/models/user";
+import { db } from "@/app/lib/db";
 
 export async function POST(req: Request){
     try {
-        // await connectDB();
+        await db();
         const {username,email,password} = await req.json();
             console.log("Request body:", { username, email, password });
         // check if all fields are filled
@@ -29,7 +28,6 @@ export async function POST(req: Request){
         };
 
         // save user
-        await connectDB();
         await User.create(newUser);
         // return user without password
         // eslint-disable-next-line @typescript-eslint/no-unused-vars

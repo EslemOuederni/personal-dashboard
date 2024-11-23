@@ -1,15 +1,16 @@
-import { connectDB } from "@/app/lib/mongodb";
 import Task from "@/app/models/task";
 import { ITask } from "@/app/types/task";
 import { NextResponse } from "next/server";
+import {db} from "@/app/lib/db";
 
 export async function GET(
   req: Request,
-  { params }: { params: { _id: string } }
+  { params} : { params:Promise<{ _id: string }>  }
 ) {
   try {
-    await connectDB();
-    const tasks = await Task.findById(params._id);
+    await db();
+    const {_id} = await params;
+    const tasks = await Task.findById(_id);
     if (!tasks) {
       return new Response("Project not found", { status: 404 });
     }
@@ -21,12 +22,13 @@ export async function GET(
 
 export async function PUT(
   req: Request,
-  { params }: { params: { _id: string } }
+  { params} : { params:Promise<{ _id: string }>  }
 ) {
   try {
-    await connectDB();
+    await db();
+    const {_id} = await params;
     const body: ITask = await req.json();
-    const task = await Task.findByIdAndUpdate(params._id, body, {
+    const task = await Task.findByIdAndUpdate(_id, body, {
       new: true,
     });
     if (!task) {
@@ -40,11 +42,12 @@ export async function PUT(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { _id: string } }
+  { params} : { params:Promise<{ _id: string }>  }
 ) {
   try {
-    await connectDB();
-    const task = await Task.findByIdAndDelete(params._id);
+    await db();
+    const {_id} = await params;
+    const task = await Task.findByIdAndDelete(_id);
     if (!task) {
       return new Response("Task not found", { status: 404 });
     }

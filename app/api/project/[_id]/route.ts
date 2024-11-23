@@ -1,14 +1,14 @@
-import { connectDB } from "@/app/lib/mongodb";
 import Project from "@/app/models/project";
 import { IProject } from "@/app/types/project";
 import { NextResponse, NextRequest } from "next/server";
+import {db} from "@/app/lib/db";
 
 export async function GET(
   req: NextRequest,
   { params} : { params:Promise<{ _id: string }>  }
 ) {
   try {
-    await connectDB();
+    await db();
     const {_id} = await params;
     const projects = await Project.findById(_id);
     if (!projects) {
@@ -25,7 +25,7 @@ export async function PUT(
   { params} : { params:Promise<{ _id: string }>  }
 ) {
   try {
-    await connectDB();
+    await db();
     const {_id} = await params;
     const body: IProject = await req.json();
     const project = await Project.findByIdAndUpdate(_id, body, {
@@ -45,7 +45,7 @@ export async function DELETE(
   { params} : { params:Promise<{ _id: string }>  }
 ) {
   try {
-    await connectDB();
+    await db();
     const {_id} = await params;
     const project = await Project.findByIdAndDelete(_id);
     if (!project) {
