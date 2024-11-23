@@ -8,8 +8,8 @@ export async function GET() {
     await connectDB();
     const projects = await Project.find();
     return NextResponse.json(projects, { status: 200 });
-  } catch (error: any) {
-    return NextResponse.json({ message: error.message }, { status: 500 });
+  } catch (error) {
+    return NextResponse.json({ message: error }, { status: 500 });
   }
 }
 
@@ -19,7 +19,7 @@ export async function POST(req: Request) {
     const body: IProject = await req.json();
     const project = await Project.create(body);
     return NextResponse.json(project, { status: 201 });
-  } catch (error: any) {
-    return NextResponse.json({ message: error.message }, { status: 500 });
+  } catch (error) {
+    return NextResponse.json({ message: error }, { status: 500 });
   }
 }

@@ -9,8 +9,8 @@ export async function GET() {
     await connectDB();
     const tasks = await Task.find();
     return NextResponse.json(tasks, { status: 200 });
-  } catch (error: any) {
-    return NextResponse.json({ message: error.message }, { status: 500 });
+  } catch (error) {
+    return NextResponse.json({ message: error }, { status: 500 });
   }
 }
 
@@ -40,11 +40,11 @@ export async function POST(req: Request) {
     await project.save();
 
     return NextResponse.json(task, { status: 201 });
-  } catch (error: any) {
+  } catch (error) {
     return NextResponse.json(
       {
         message: "An error occurred while creating the task.",
-        error: error.message,
+        error: error
       },
       { status: 500 }
     );

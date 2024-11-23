@@ -14,8 +14,8 @@ export async function GET(
       return new Response("Project not found", { status: 404 });
     }
     return NextResponse.json(projects, { status: 200 });
-  } catch (error: any) {
-    return NextResponse.json({ message: error.message }, { status: 500 });
+  } catch (error) {
+    return NextResponse.json({ message: error }, { status: 500 });
   }
 }
 
@@ -33,8 +33,8 @@ export async function PUT(
       return new Response("Project not found", { status: 404 });
     }
     return NextResponse.json(project, { status: 200 });
-  } catch (error: any) {
-    return NextResponse.json({ message: error.message }, { status: 500 });
+  } catch (error) {
+    return NextResponse.json({ message: error }, { status: 500 });
   }
 }
 
@@ -49,7 +49,7 @@ export async function DELETE(
       return new Response("Project not found", { status: 404 });
     }
     return new Response("Project deleted", { status: 200 });
-  } catch (error:any) {
-    return NextResponse.json({ message: error.message }, { status: 500 });
+  } catch (error) {
+    return NextResponse.json({ message: error }, { status: 500 });
   }
 }
