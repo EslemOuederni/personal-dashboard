@@ -22,12 +22,13 @@ export async function GET(
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { _id: string } }
+  { params} : { params:Promise<{ _id: string }>  }
 ) {
   try {
     await connectDB();
+    const {_id} = await params;
     const body: IProject = await req.json();
-    const project = await Project.findByIdAndUpdate(params._id, body, {
+    const project = await Project.findByIdAndUpdate(_id, body, {
       new: true,
     });
     if (!project) {
@@ -41,11 +42,12 @@ export async function PUT(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { _id: string } }
+  { params} : { params:Promise<{ _id: string }>  }
 ) {
   try {
     await connectDB();
-    const project = await Project.findByIdAndDelete(params._id);
+    const {_id} = await params;
+    const project = await Project.findByIdAndDelete(_id);
     if (!project) {
       return new Response("Project not found", { status: 404 });
     }
