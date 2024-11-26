@@ -1,10 +1,11 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import { NextAuthOptions } from "next-auth"
+import client from "./mongoClient"
+import { MongoDBAdapter } from "@auth/mongodb-adapter";
 
 export const authOptions: NextAuthOptions = ({
+  adapter: MongoDBAdapter(client),
   providers: [
-    // Providers
-    // credentials
     CredentialsProvider({
       name: "Credentials",
       credentials: {
