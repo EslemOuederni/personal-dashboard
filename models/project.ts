@@ -1,5 +1,5 @@
 import { Schema, model, models } from "mongoose";
-import { IProject } from "../types/project";
+import { IProject } from "../app/types/project";
 
 const ProjectSchema = new Schema<IProject>({
   name: { type: String, required: true },
@@ -10,8 +10,8 @@ const ProjectSchema = new Schema<IProject>({
     enum: ["not started", "in-progress", "completed"],
     default: "not started",
   },
-  tag: { type: String }, 
-  tasks: [{ type: Schema.Types.ObjectId, ref: "Task" }], 
+  tag: { type: String },
+  tasks: [{ type: Schema.Types.ObjectId, ref: "Task" }],
 });
 
 const Project = models.Project || model<IProject>("Project", ProjectSchema);
