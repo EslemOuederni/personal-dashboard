@@ -1,58 +1,67 @@
-import Task from "@/app/models/task";
+import Task from "@/models/task";
 import { ITask } from "@/app/types/task";
 import { NextResponse } from "next/server";
-import {db} from "@/app/lib/db";
+import { db } from "@/lib/db";
 
-export async function GET(
+export async function GET (
   req: Request,
-  { params} : { params:Promise<{ _id: string }>  }
+  { params }: { params: Promise<{ _id: string }> }
 ) {
-  try {
+  try
+  {
     await db();
-    const {_id} = await params;
+    const { _id } = await params;
     const tasks = await Task.findById(_id);
-    if (!tasks) {
+    if (!tasks)
+    {
       return new Response("Project not found", { status: 404 });
     }
     return NextResponse.json(tasks, { status: 200 });
-  } catch (error) {
+  } catch (error)
+  {
     return NextResponse.json({ message: error }, { status: 500 });
   }
 }
 
-export async function PUT(
+export async function PUT (
   req: Request,
-  { params} : { params:Promise<{ _id: string }>  }
+  { params }: { params: Promise<{ _id: string }> }
 ) {
-  try {
+  try
+  {
     await db();
-    const {_id} = await params;
+    const { _id } = await params;
     const body: ITask = await req.json();
     const task = await Task.findByIdAndUpdate(_id, body, {
       new: true,
     });
-    if (!task) {
+    if (!task)
+    {
       return new Response("Task not found", { status: 404 });
     }
     return NextResponse.json(task, { status: 200 });
-  } catch (error) {
+  } catch (error)
+  {
     return NextResponse.json({ message: error }, { status: 500 });
   }
 }
 
-export async function DELETE(
+export async function DELETE (
   req: Request,
-  { params} : { params:Promise<{ _id: string }>  }
+  { params }: { params: Promise<{ _id: string }> }
 ) {
-  try {
+  try
+  {
     await db();
-    const {_id} = await params;
+    const { _id } = await params;
     const task = await Task.findByIdAndDelete(_id);
-    if (!task) {
+    if (!task)
+    {
       return new Response("Task not found", { status: 404 });
     }
     return new Response("Task deleted", { status: 200 });
-  } catch (error) {
+  } catch (error)
+  {
     return NextResponse.json({ message: error }, { status: 500 });
   }
 }
