@@ -10,14 +10,16 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   useSidebar,
+  SidebarGroupLabel,
+  SidebarGroupAction
 } from "@/components/ui/sidebar";
-import CustomTrigger from "./ui/CustomTrigger";
 import {
   LayoutDashboard,
   CalendarSearch,
   Settings,
   ListTodo,
   UsersRound,
+  Plus
 } from "lucide-react";
 
 const items = [
@@ -59,10 +61,10 @@ const NavBar = () => {
           {open ? (
             <Link href="/" className="py-3 px-2">
               <Image
-                src="/logo-mySpace.svg"
+                src="/logo-1.svg"
                 alt="Logo"
-                width={300}
-                height={80}
+                width={249}
+                height={79}
               />
             </Link>
           ) : (
@@ -79,14 +81,23 @@ const NavBar = () => {
             {items.map((item) => (
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton asChild>
-                  <Link href={item.href}>
-                    <item.icon />
+                  <Link href={item.href} className="font-medium text-lg text-[#3D3C3C]">
+                    <item.icon className='icons' />
                     <span>{item.title}</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             ))}
           </SidebarMenu>
+        </SidebarGroup>
+      </SidebarContent>
+      <hr className="w-[calc(100%-34px)] mx-auto  border-t border-[#DBDBDB] " />
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel className=" font-bold text-base text-[#353535]">My Projects</SidebarGroupLabel>
+          <SidebarGroupAction title="Add Project">
+            <Plus /><span className="sr-only">Add Project</span>
+          </SidebarGroupAction>
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
