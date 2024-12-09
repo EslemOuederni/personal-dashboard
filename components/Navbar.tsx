@@ -11,7 +11,11 @@ import {
   SidebarMenuButton,
   useSidebar,
   SidebarGroupLabel,
-  SidebarGroupAction
+  SidebarGroupAction,
+  SidebarTrigger,
+  SidebarMenuSubItem,
+  SidebarMenuSubButton,
+  SidebarMenuSub,
 } from "@/components/ui/sidebar";
 import {
   LayoutDashboard,
@@ -19,8 +23,17 @@ import {
   Settings,
   ListTodo,
   UsersRound,
-  Plus
+  Plus,
+  type LucideIcon,
+  ChevronRight,
 } from "lucide-react";
+import { useState } from "react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "./ui/collapsible";
+// import "../app/icons.css";
 
 const items = [
   {
@@ -51,54 +64,58 @@ const items = [
 ];
 
 const NavBar = () => {
-  const { open, setOpen } = useSidebar(); // Ensure you have the correct hook
+  const [activeLink, setActiveLink] = useState("/");
+
+  const handleLinkClick = (href: string) => {
+    setActiveLink(href);
+  };
 
   return (
-    <Sidebar collapsible="icon" variant="inset">
-      <SidebarHeader>
-        <div className="flex justify-between items-center">
-          {/* Logo section */}
-          {open ? (
-            <Link href="/" className="py-3 px-2">
-              <Image
-                src="/logo-1.svg"
-                alt="Logo"
-                width={249}
-                height={79}
-              />
-            </Link>
-          ) : (
-            <Link href="/" className="py-3 px-2">
-              <Image src="/logo.svg" alt="Logo" width={82} height={82} />
-            </Link>
-          )}
-          {/* Trigger button */}
-        </div>
+    <Sidebar variant="inset" collapsible="icon" className="bg-[#1F271B]">
+      <SidebarHeader className=" h-[12%]">
+        <Link href="/" className="px-0 mx-1">
+          <Image src="/logo-1.svg" alt="Logo" width={127} height={40.5} />
+        </Link>
       </SidebarHeader>
-      <SidebarContent>
-        <SidebarGroup>
+      <SidebarContent className="pt-4">
+        <SidebarGroup className="pb-5">
           <SidebarMenu>
             {items.map((item) => (
-              <SidebarMenuItem key={item.title}>
-                <SidebarMenuButton asChild>
-                  <Link href={item.href} className="font-medium text-lg text-[#3D3C3C]">
-                    <item.icon className='icons' />
-                    <span>{item.title}</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+              <Collapsible
+                key={item.title}
+                asChild
+                className="group/collapsible"
+              >
+                <SidebarMenuItem>
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton
+                      tooltip={item.title}
+                      className="stroke-2 [&>svg]:size-5 !important'"
+                      isActive={activeLink === item.href}
+                      onClick={() => handleLinkClick(item.href)}
+                    >
+                      {item.icon && <item.icon />}
+                      <span>{item.title}</span>
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                </SidebarMenuItem>
+              </Collapsible>
             ))}
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
       <hr className="w-[calc(100%-34px)] mx-auto  border-t border-[#DBDBDB] " />
-      <SidebarContent>
+      <SidebarContent className="flex-1 pt-2">
         <SidebarGroup>
-          <SidebarGroupLabel className=" font-bold text-base text-[#353535]">My Projects</SidebarGroupLabel>
-          <SidebarGroupAction title="Add Project">
-            <Plus /><span className="sr-only">Add Project</span>
-          </SidebarGroupAction>
+          <SidebarGroupLabel className=" font-bold text-base text-[#353535]">
+            <span>My Projects</span>
+            <SidebarGroupAction title="Add Project">
+              <Plus />
+              <span className="sr-only">Add Project</span>
+            </SidebarGroupAction>
+          </SidebarGroupLabel>
         </SidebarGroup>
+        {/* testing */}
       </SidebarContent>
     </Sidebar>
   );
