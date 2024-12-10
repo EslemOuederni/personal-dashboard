@@ -1,9 +1,8 @@
-import { getServerSession } from "next-auth";
 import RedirectButton from "@/components/RedirectBtn";
-import { authOptions } from '@/lib/auth';
 import Dashboard from '@/components/dashboard/page';
+import { auth } from '@/lib/auth';
 export default async function Home () {
-  const session = await getServerSession(authOptions);
+  const session = await auth()
   return (
     <>
       {session ? (
