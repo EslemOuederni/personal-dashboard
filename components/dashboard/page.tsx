@@ -3,8 +3,9 @@
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { Button, buttonVariants } from '../ui/button';
-import Image from 'next/image';
+import { Button, buttonVariants } from "../ui/button";
+import Image from "next/image";
+import Header from "../Header";
 
 export const dynamic = "force-dynamic";
 
@@ -19,7 +20,7 @@ export default function Dashboard() {
   }, [status, router]);
 
   if (status === "loading") {
-    return <p>Loading...</p>; 
+    return <p>Loading...</p>;
   }
 
   if (!session) {
@@ -27,11 +28,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="flex flex-col justify-start">
-      <h1 className="text-3xl font-bold">Welcome to My Space {session.user?.name}</h1>
-      <Image src={session.user?.image as string} alt="user image" width={100} height={100} className='rounded-full' />
-      <p className="mt-5">This is a dashboard page</p>
-      <Button className={`${buttonVariants({ size: 'lg', variant: 'destructive' })} mt-5`} onClick={()=> signOut({callbackUrl:"/sign-in"})}>Sign out</Button>
+    <div className="flex flex-col justify-start ">
     </div>
   );
 }
