@@ -9,7 +9,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   session: {
     strategy: "database",
   },
-  providers: [GitHub, Google({
+  providers: [GitHub({
+    allowDangerousEmailAccountLinking: true,
+  }), Google({
     clientId: process.env.AUTH_GOOGLE_ID,
     clientSecret: process.env.AUTH_GOOGLE_SECRET,
     allowDangerousEmailAccountLinking: true,
