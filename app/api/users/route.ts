@@ -1,12 +1,14 @@
-import { db } from '@/lib/db';
-import mongoose from 'mongoose';
-import { NextResponse } from 'next/server';
+import { db } from "@/lib/db";
+import User from "@/models/user";
+import mongoose from "mongoose";
+import { NextResponse } from "next/server";
 
-export async function GET () {
-    try {
-        const users = await mongoose.connection.db?.collection('users').find().toArray();
-        return NextResponse.json(users, { status: 200 });
-    } catch (error) {
-        console.error(error);
-    }
+export async function GET() {
+  try {
+    await db();
+    const users = await User.find();
+    return NextResponse.json(users, { status: 200 });
+  } catch (error) {
+    console.error(error);
+  }
 }

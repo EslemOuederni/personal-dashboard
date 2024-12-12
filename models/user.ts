@@ -9,5 +9,5 @@ const UserSchema = new Schema<IUser>({
     emailVerified: { type: Date, default: null },
 });
 
-const User = models.User || model<IUser>("users", UserSchema);
+const User = models.User || model<IUser>("User", UserSchema);
 export default User;

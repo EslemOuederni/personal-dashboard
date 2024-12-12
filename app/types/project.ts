@@ -1,7 +1,6 @@
-
 import { Types } from "mongoose";
 import { ITask } from "./task";
-import { IUser } from './users';
+import { IUser } from "./users";
 
 export interface IProject {
   _id: Types.ObjectId;
@@ -11,7 +10,7 @@ export interface IProject {
   status?: "not started" | "in-progress" | "completed";
   tag?: string;
   tasks?: Types.ObjectId[] | ITask[];
-  user: Types.ObjectId | IUser;
+  userId: Types.ObjectId | IUser;
   createdAt?: Date;
   updatedAt?: Date;
 }
