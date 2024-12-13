@@ -27,14 +27,17 @@ import {
   type LucideIcon,
   ChevronRight,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "./ui/collapsible";
+import NavProjects from './nav-projects';
+import { IProject } from '@/app/types/project';
+import { useSession } from 'next-auth/react';
 // import "../app/icons.css";
-
+export const dynamic = 'force-dynamic'
 const items = [
   {
     title: "Dashboard",
@@ -44,7 +47,7 @@ const items = [
   {
     title: "Members",
     icon: UsersRound,
-    href: "/memebers",
+    href: "/members",
   },
   {
     title: "Tasks",
@@ -65,6 +68,18 @@ const items = [
 
 const NavBar = () => {
   const [activeLink, setActiveLink] = useState("/");
+  const [projects, setProjects] = useState([]);
+  const { data: session } = useSession();
+
+
+  useEffect(() => {
+    async function fetchPosts () {
+      const res = await fetch(`/api/project/by-user?userId=${session?.user.id}`)
+      const data = await res.json()
+      setProjects(data)
+    }
+    fetchPosts()
+  }, [])
 
   const handleLinkClick = (href: string) => {
     setActiveLink(href);
@@ -106,16 +121,7 @@ const NavBar = () => {
       </SidebarContent>
       <hr className="w-[calc(100%-34px)] mx-auto  border-t border-[#DBDBDB] " />
       <SidebarContent className="flex-1 pt-2">
-        <SidebarGroup>
-          <SidebarGroupLabel className=" font-bold text-base text-[#353535]">
-            <span>My Projects</span>
-            <SidebarGroupAction title="Add Project">
-              <Plus />
-              <span className="sr-only">Add Project</span>
-            </SidebarGroupAction>
-          </SidebarGroupLabel>
-        </SidebarGroup>
-        {/* testing */}
+        <NavProjects props={projects} />
       </SidebarContent>
     </Sidebar>
   );
