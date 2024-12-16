@@ -1,25 +1,27 @@
-import { auth } from '@/lib/auth';
+import { auth } from "@/lib/auth";
+import { IProject } from "../types/project";
 
-export default async function UserProjects () {
-    try {
-        const session = await auth();
-        const userId = session?.user?.id;
+export default async function UserProjects(): Promise<IProject[] | undefined> {
+  try {
+    const session = await auth();
+    const userId = session?.user?.id;
+    console.log(userId);
 
-        if (!userId) {
-            console.error("User not authenticated.");
-        }
+    if (!userId) {
+      console.error("User not authenticated.");
+    }
 
-        const res = await fetch(`/api/project/by-user?userId=${userId}`, {
-            cache: "no-store",
-        });
+    const res = await fetch(`http://localhost:3000/api/project/by-user?userId=${userId}`, {
+      cache: "no-store",
+    });
 
-        if (!res.ok) {
-            throw new Error("Failed to fetch projects.");
-        }
+    if (!res.ok) {
+      throw new Error("Failed to fetch projects.");
+    }
 
-        const data = await res.json();
-        return data;
-    } catch (error: any) {
-        console.error(error);
-    };
+    const data: IProject[] = await res.json();
+    return data;
+  } catch (error: any) {
+    console.error(error);
+  }
 }
