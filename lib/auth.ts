@@ -17,7 +17,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     allowDangerousEmailAccountLinking: true,
   })],
   pages: {
-    signIn: "/signin",
+    signIn: "/",
   },
   callbacks: {
     authorized: async ({ auth }) => {
