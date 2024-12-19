@@ -1,4 +1,3 @@
-
 import {
   Collapsible,
   CollapsibleTrigger,
@@ -13,10 +12,12 @@ import {
   SidebarMenuSubItem,
   SidebarHeader,
   SidebarMenuSubButton,
+  SidebarGroupLabel,
 } from "./ui/sidebar";
 import { GalleryVerticalEnd, Minus, Plus } from "lucide-react";
 import { IProject } from "@/app/types/project";
 import UserProjects from "@/app/dashboard/actions";
+import Link from "next/link";
 
 const NavProjects = async () => {
   const project = await UserProjects();
@@ -27,7 +28,9 @@ const NavProjects = async () => {
           <SidebarMenuItem>
             <CollapsibleTrigger asChild>
               <SidebarMenuButton className="font-semibold text-base text-[#353535]">
-                MY PROJECTS
+                <SidebarGroupLabel className="font-semibold text-base text-[#353535]">
+                  MY PROJECTS
+                </SidebarGroupLabel>
                 <Plus className="ml-auto group-data-[state=open]/collapsible:hidden" />
                 <Minus className="ml-auto group-data-[state=closed]/collapsible:hidden" />
               </SidebarMenuButton>
@@ -38,7 +41,9 @@ const NavProjects = async () => {
                   {project.map((item) => (
                     <SidebarMenuSubItem key={item.name}>
                       <SidebarMenuSubButton asChild>
-                        <a href={`/dashboard/project/${item._id}`}>{item.name}</a>
+                        <Link href={`/dashboard/project/${item._id}`}>
+                          {item.name}
+                        </Link>
                       </SidebarMenuSubButton>
                     </SidebarMenuSubItem>
                   ))}

@@ -13,27 +13,27 @@ const items = [
   {
     title: "Dashboard",
     icon: LayoutDashboard,
-    href: "/",
+    href: "/dashboard",
   },
   {
     title: "Members",
     icon: UsersRound,
-    href: "/members",
+    href: "/dashboard/members",
   },
   {
     title: "Tasks",
     icon: ListTodo,
-    href: "/tasks",
+    href: "/dashboard/tasks",
   },
   {
     title: "Calendar",
     icon: CalendarSearch,
-    href: "/calendar",
+    href: "/dashboard/calendar",
   },
   {
     title: "Settings",
     icon: Settings,
-    href: "/settings",
+    href: "/dashboard/settings",
   },
 ];
 
