@@ -26,15 +26,12 @@ const NavProjects = async () => {
       <SidebarMenu>
         <Collapsible defaultOpen={true} className="group/collapsible">
           <SidebarMenuItem>
-            <CollapsibleTrigger asChild>
               <SidebarMenuButton className="font-semibold text-base text-[#353535]">
                 <SidebarGroupLabel className="font-semibold text-base text-[#353535]">
                   MY PROJECTS
                 </SidebarGroupLabel>
-                <Plus className="ml-auto group-data-[state=open]/collapsible:hidden" />
-                <Minus className="ml-auto group-data-[state=closed]/collapsible:hidden" />
+                <img src="assets/icons/add-square.svg" className=" ml-auto" />
               </SidebarMenuButton>
-            </CollapsibleTrigger>
             {project?.length ? (
               <CollapsibleContent>
                 <SidebarMenuSub>
