@@ -10,12 +10,10 @@ import {
   SidebarMenuButton,
   SidebarMenuSub,
   SidebarMenuSubItem,
-  SidebarHeader,
   SidebarMenuSubButton,
   SidebarGroupLabel,
 } from "./ui/sidebar";
-import { GalleryVerticalEnd, Minus, Plus } from "lucide-react";
-import { IProject } from "@/app/types/project";
+
 import UserProjects from "@/app/dashboard/actions";
 import Link from "next/link";
 
