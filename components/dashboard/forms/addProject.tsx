@@ -3,9 +3,10 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod"
 import { formSchema, ProjectFormSchema } from './formSchema';
 import { addProject } from '@/app/dashboard/actions';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 const AddProjectForm = () => {
+    const router = useRouter();
     const form = useForm<ProjectFormSchema>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -20,7 +21,7 @@ const AddProjectForm = () => {
         try {
             await addProject(values);
             console.log("Project added successfully!");
-            redirect('/dashboard')
+            router.refresh()
         } catch (error) {
             console.log("Failed to add project.");
         }
