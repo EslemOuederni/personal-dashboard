@@ -4,8 +4,9 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import mongoose from "mongoose";
 import User from "@/models/user";
+import { formSchema } from '@/components/dashboard/forms/formSchema';
 
-export async function GET() {
+export async function GET () {
   try {
     await db();
     const projects = await Project.find();
@@ -15,11 +16,13 @@ export async function GET() {
   }
 }
 
-export async function POST(req: Request) {
+export async function POST (req: Request) {
   try {
     await db();
     const body: IProject = await req.json();
-    if (!body.userId) {
+    const { name, startDate, endDate, tag, userId } = body;
+
+    if (!userId) {
       return NextResponse.json(
         { message: "User ID is required to create a project." },
         { status: 400 }
@@ -32,7 +35,15 @@ export async function POST(req: Request) {
       return NextResponse.json({ message: "User not found." }, { status: 404 });
     }
 
-    const newProject = await Project.create(body);
+    const newProject = await Project.create(
+      {
+        name,
+        startDate,
+        endDate,
+        tag,
+        userId,
+      }
+    )
     return NextResponse.json(newProject, { status: 201 });
   } catch (error) {
     return NextResponse.json({ message: error }, { status: 500 });

@@ -1,12 +1,13 @@
+"use server"
 import { auth } from "@/lib/auth";
 import { IProject } from "../types/project";
+import { z } from 'zod';
+import { ProjectFormSchema } from '@/components/dashboard/forms/formSchema';
 
 export default async function UserProjects (): Promise<IProject[] | undefined> {
   try {
     const session = await auth();
     const userId = session?.user?.id;
-    console.log(userId);
-
     if (!userId) {
       console.error("User not authenticated.");
     }
@@ -57,5 +58,40 @@ export async function getProjects () {
     return data;
   } catch (error: any) {
     console.error(error);
+  }
+}
+
+export async function addProject (formData: ProjectFormSchema) {
+  try {
+    // Get the session and userId
+    const session = await auth();
+    const userId = session?.user.id;
+
+    if (!userId) {
+      console.error("User is not logged in.");
+      alert("You need to be logged in to add a project.");
+      return;
+    }
+
+    // Add the userId to the formData
+    const data = { ...formData, userId };
+    const response = await fetch("http://localhost:3000/api/project", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      console.log("Project added successfully!");
+    } else {
+      console.log(result?.message || "Failed to add project.");
+    }
+  } catch (error) {
+    console.error(error);
+    console.log("An error occurred while adding the project.");
   }
 }

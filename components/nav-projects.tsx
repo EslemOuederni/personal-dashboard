@@ -16,6 +16,7 @@ import {
 
 import UserProjects from "@/app/dashboard/actions";
 import Link from "next/link";
+import CreateProject from './dashboard/projectModal';
 
 const NavProjects = async () => {
   const project = await UserProjects();
@@ -24,17 +25,17 @@ const NavProjects = async () => {
       <SidebarMenu>
         <Collapsible defaultOpen={true} className="group/collapsible">
           <SidebarMenuItem>
-              <SidebarMenuButton className="font-semibold text-base text-[#353535]">
-                <SidebarGroupLabel className="font-semibold text-base text-[#353535]">
-                  MY PROJECTS
-                </SidebarGroupLabel>
-                <img src="assets/icons/add-square.svg" className=" ml-auto" />
-              </SidebarMenuButton>
+            <div className=" flex font-semibold text-base text-[#353535] justify-between">
+              <SidebarGroupLabel className="font-semibold text-base text-[#353535]">
+                MY PROJECTS
+              </SidebarGroupLabel>
+              <CreateProject />
+            </div>
             {project?.length ? (
               <CollapsibleContent>
                 <SidebarMenuSub>
                   {project.map((item) => (
-                    <SidebarMenuSubItem key={item.name}>
+                    <SidebarMenuSubItem key={item._id.toString()}>
                       <SidebarMenuSubButton asChild>
                         <Link href={`/dashboard/project/${item._id}`}>
                           {item.name}
