@@ -1,10 +1,10 @@
-"use server"
+"use server";
 import { auth } from "@/lib/auth";
 import { IProject } from "../types/project";
-import { z } from 'zod';
-import { ProjectFormSchema } from '@/components/dashboard/forms/formSchema';
+import { z } from "zod";
+import { ProjectFormSchema } from "@/components/dashboard/forms/ProjectFormValidation";
 
-export default async function UserProjects (): Promise<IProject[] | undefined> {
+export default async function UserProjects(): Promise<IProject[] | undefined> {
   try {
     const session = await auth();
     const userId = session?.user?.id;
@@ -12,9 +12,12 @@ export default async function UserProjects (): Promise<IProject[] | undefined> {
       console.error("User not authenticated.");
     }
 
-    const res = await fetch(`http://localhost:3000/api/project/by-user?userId=${userId}`, {
-      cache: "no-store",
-    });
+    const res = await fetch(
+      `http://localhost:3000/api/project/by-user?userId=${userId}`,
+      {
+        cache: "no-store",
+      }
+    );
 
     if (!res.ok) {
       throw new Error("Failed to fetch projects.");
@@ -27,7 +30,7 @@ export default async function UserProjects (): Promise<IProject[] | undefined> {
   }
 }
 
-export async function getProjectById (projectId: string) {
+export async function getProjectById(projectId: string) {
   try {
     const res = await fetch(`http://localhost:3000/api/project/${projectId}`, {
       cache: "no-store",
@@ -44,7 +47,7 @@ export async function getProjectById (projectId: string) {
   }
 }
 
-export async function getProjects () {
+export async function getProjects() {
   try {
     const res = await fetch(`http://localhost:3000/api/project`, {
       cache: "no-store",
@@ -61,7 +64,7 @@ export async function getProjects () {
   }
 }
 
-export async function addProject (formData: ProjectFormSchema) {
+export async function addProject(formData: ProjectFormSchema) {
   try {
     // Get the session and userId
     const session = await auth();

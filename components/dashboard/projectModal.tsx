@@ -12,7 +12,7 @@ export default function CreateProject () {
     return (
         <Dialog>
             <DialogTrigger>
-                <img src="assets/icons/add-square.svg" className=" ml-auto" />
+                <img src="/assets/icons/add-square.svg" className=" ml-auto" />
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
