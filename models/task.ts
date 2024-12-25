@@ -11,7 +11,6 @@ const TaskSchema = new Schema<ITask>(
     category: { type: String },
     slotsOfTime: [{ type: Number }],
     project: { type: Schema.Types.ObjectId, ref: "Project", required: true },
-    user: { type: Schema.Types.ObjectId, ref: "users", required: true },
     status: {
       type: String,
       enum: ["pending", "in-progress", "completed"],
