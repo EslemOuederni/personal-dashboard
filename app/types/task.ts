@@ -1,6 +1,5 @@
 import { Types } from "mongoose";
 import { IProject } from "./project";
-import { IUser } from './users';
 
 export interface IComment {
   text: string;
@@ -16,7 +15,6 @@ export interface ITask {
   description?: string;
   category?: string;
   project: IProject;
-  user: IUser;
   slotsOfTime?: number[];
   status?: "pending" | "in-progress" | "completed";
   priority?: "low" | "medium" | "high";

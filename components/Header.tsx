@@ -1,3 +1,6 @@
+"use client";
+import { signOut, useSession } from "next-auth/react";
+import React, { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,15 +9,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { Button } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronDownIcon, EllipsisVertical } from "lucide-react";
 import { SidebarTrigger } from "./ui/sidebar";
-import { auth, signOut } from '@/lib/auth';
 
-const Header = async () => {
-  const session = await auth()
+const Header = () => {
+  const { data: session, status } = useSession();
   let user = session?.user;
 
   return (
@@ -52,16 +54,12 @@ const Header = async () => {
           <DropdownMenuSeparator />
           {user ? (
             <DropdownMenuItem>
-              <form
-                action={async () => {
-                  'use server';
-                  await signOut({
-                    redirectTo: '/',
-                  });
-                }}
+              <Button
+                className={`${buttonVariants({ size: "sm", variant: "destructive" })}`}
+                onClick={() => signOut({ callbackUrl: "/sign-in" })}
               >
-                <button type="submit">Sign Out</button>
-              </form>
+                Sign out
+              </Button>
             </DropdownMenuItem>
           ) : (
             <DropdownMenuItem>
