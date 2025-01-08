@@ -2,9 +2,9 @@
 import { auth } from "@/lib/auth";
 import { IProject } from "../types/project";
 import { z } from "zod";
-import { ProjectFormSchema } from "@/components/dashboard/forms/ProjectFormValidation";
+import { ProjectFormSchema } from "@/components/projects/AddProject/projectFormValidation";
 
-export default async function UserProjects(): Promise<IProject[] | undefined> {
+export default async function UserProjects (): Promise<IProject[] | undefined> {
   try {
     const session = await auth();
     const userId = session?.user?.id;
@@ -30,7 +30,7 @@ export default async function UserProjects(): Promise<IProject[] | undefined> {
   }
 }
 
-export async function getProjectById(projectId: string) {
+export async function getProjectById (projectId: string) {
   try {
     const res = await fetch(`http://localhost:3000/api/project/${projectId}`, {
       cache: "no-store",
@@ -47,7 +47,7 @@ export async function getProjectById(projectId: string) {
   }
 }
 
-export async function getProjects() {
+export async function getProjects () {
   try {
     const res = await fetch(`http://localhost:3000/api/project`, {
       cache: "no-store",
@@ -64,7 +64,7 @@ export async function getProjects() {
   }
 }
 
-export async function addProject(formData: ProjectFormSchema) {
+export async function addProject (formData: ProjectFormSchema) {
   try {
     // Get the session and userId
     const session = await auth();
@@ -96,5 +96,31 @@ export async function addProject(formData: ProjectFormSchema) {
   } catch (error) {
     console.error(error);
     console.log("An error occurred while adding the project.");
+  }
+}
+
+export async function deleteProject (projectId: string) {
+  try {
+
+    const session = await auth()
+    const user = session?.user
+
+    if (!user) {
+      console.error("User is not logged in.");
+      alert("You need to be logged in to add a project.");
+      return;
+    }
+
+    const res = await fetch(`http://localhost:3000/api/project/${projectId}`, {
+      method: "DELETE"
+    })
+
+    if (!res.ok) {
+      throw new Error("Something went wrong")
+    }
+
+  } catch (error) {
+    console.error(error);
+    console.log("An error occurred while deleting the project.");
   }
 }

@@ -4,9 +4,9 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import mongoose from "mongoose";
 import User from "@/models/user";
-import { formSchema } from "@/components/dashboard/forms/ProjectFormValidation";
+import { formSchema } from "@/components/projects/AddProject/projectFormValidation";
 
-export async function GET() {
+export async function GET () {
   try {
     await db();
     const projects = await Project.find();
@@ -16,7 +16,7 @@ export async function GET() {
   }
 }
 
-export async function POST(req: Request) {
+export async function POST (req: Request) {
   try {
     await db();
     const body: IProject = await req.json();

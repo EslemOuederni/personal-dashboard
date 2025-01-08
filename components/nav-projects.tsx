@@ -16,7 +16,7 @@ import {
 
 import UserProjects from "@/app/dashboard/actions";
 import Link from "next/link";
-import CreateProject from './dashboard/projectModal';
+import CreateProject from './projects/AddProject/projectModal';
 
 const NavProjects = async () => {
   const project = await UserProjects();
