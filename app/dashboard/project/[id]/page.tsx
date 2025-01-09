@@ -2,6 +2,7 @@ import React from "react";
 import { getProjectById } from '../../actions';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import DeleteButton from '@/components/projects/deleteProjectButton';
+import UpdateButton from '@/components/projects/updateProjectButton';
 
 
 export default async function Page ({
@@ -45,6 +46,7 @@ export default async function Page ({
             </Table>
 
             <DeleteButton projectId={id} />
+            <UpdateButton project={project} />
         </>
     )
 
