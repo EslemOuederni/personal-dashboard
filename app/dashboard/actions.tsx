@@ -14,7 +14,7 @@ export default async function UserProjects (): Promise<IProject[] | undefined> {
     }
 
     const res = await fetch(
-      `http://localhost:3000/api/project/by-user?userId=${userId}`,
+      `${process.env.URL}/api/project/by-user?userId=${userId}`,
       {
         cache: "no-store",
       }
@@ -33,7 +33,7 @@ export default async function UserProjects (): Promise<IProject[] | undefined> {
 
 export async function getProjectById (projectId: string) {
   try {
-    const res = await fetch(`http://localhost:3000/api/project/${projectId}`, {
+    const res = await fetch(`${process.env.URL}/api/project/${projectId}`, {
       cache: "force-cache",
     });
 
@@ -50,7 +50,7 @@ export async function getProjectById (projectId: string) {
 
 export async function getProjects () {
   try {
-    const res = await fetch(`http://localhost:3000/api/project`, {
+    const res = await fetch(`${process.env.URL}/api/project`, {
       cache: "no-store",
     });
 
@@ -79,7 +79,7 @@ export async function addProject (formData: ProjectFormSchema) {
 
     // Add the userId to the formData
     const data = { ...formData, userId };
-    const response = await fetch("http://localhost:3000/api/project", {
+    const response = await fetch(`${process.env.URL}/api/project`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -112,7 +112,7 @@ export async function deleteProject (projectId: string) {
       return;
     }
 
-    const res = await fetch(`http://localhost:3000/api/project/${projectId}`, {
+    const res = await fetch(`${process.env.URL}/api/project/${projectId}`, {
       method: "DELETE"
     })
 
@@ -142,7 +142,7 @@ export async function UpdateProject (projectId: string, formData: ProjectFormSch
     const data = { ...formData, userId };
     console.log(data)
 
-    const response = await fetch(`http://localhost:3000/api/project/${projectId}`, {
+    const response = await fetch(`${process.env.URL}/api/project/${projectId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
