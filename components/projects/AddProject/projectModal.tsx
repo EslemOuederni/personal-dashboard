@@ -25,8 +25,8 @@ export default function CreateProject () {
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle className='mb-2'>Add A New Project</DialogTitle>
-                    <AddProjectForm onSuccess={handleClose} />
                 </DialogHeader>
+                <AddProjectForm onSuccess={handleClose} />
             </DialogContent>
         </Dialog>
     )

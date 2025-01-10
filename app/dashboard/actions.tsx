@@ -33,7 +33,7 @@ export default async function UserProjects (): Promise<IProject[] | undefined> {
 export async function getProjectById (projectId: string) {
   try {
     const res = await fetch(`http://localhost:3000/api/project/${projectId}`, {
-      cache: "no-store",
+      cache: "force-cache",
     });
 
     if (!res.ok) {
