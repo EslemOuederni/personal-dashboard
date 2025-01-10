@@ -17,9 +17,6 @@ export default async function UserProjects (): Promise<IProject[] | undefined> {
       `http://localhost:3000/api/project/by-user?userId=${userId}`,
       {
         cache: "no-store",
-        headers: {
-          "Content-Type": "application/json",
-        },
       }
     );
 
