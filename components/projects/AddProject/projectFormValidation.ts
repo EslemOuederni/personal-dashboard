@@ -13,16 +13,7 @@ export const formSchema = z
     endDate: z.preprocess(
       (val) =>
         typeof val === "string" || val instanceof Date ? new Date(val) : val,
-      z.date().refine(
-        (date) => {
-          const now = new Date();
-          now.setHours(0, 0, 0, 0); // Normalize to midnight for comparison
-          return date > now;
-        },
-        {
-          message: "End date must be in the future",
-        }
-      )
+      z.date()
     ),
     tag: z.string().optional(),
   })
