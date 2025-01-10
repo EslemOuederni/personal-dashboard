@@ -84,3 +84,11 @@
 body {
   background-color: #ffffff;
 }
+
+.react-datepicker__view-calendar-icon input {
+  padding-left: 30px !important;
+}
+
+.react-datepicker__input-container .react-datepicker__calendar-icon {
+  padding-top: 10px;
+}
