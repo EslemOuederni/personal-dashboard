@@ -26,7 +26,7 @@ const NavProjects = async () => {
         <Collapsible defaultOpen={true} className="group/collapsible">
           <SidebarMenuItem>
             <div className=" flex font-semibold text-base text-[#353535] justify-between">
-              <SidebarGroupLabel className="font-semibold text-base text-[#353535]">
+              <SidebarGroupLabel className="font-semibold text-base text-[#353535] pl-4">
                 MY PROJECTS
               </SidebarGroupLabel>
               <CreateProject />
