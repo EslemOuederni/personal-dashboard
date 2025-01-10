@@ -14,9 +14,9 @@ import {
   SidebarGroupLabel,
 } from "./ui/sidebar";
 
-import UserProjects from "@/app/dashboard/actions";
 import Link from "next/link";
 import CreateProject from './projects/AddProject/projectModal';
+import UserProjects from '@/app/dashboard/actions';
 
 const NavProjects = async () => {
   const project = await UserProjects();

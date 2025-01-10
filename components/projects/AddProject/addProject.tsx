@@ -7,7 +7,7 @@ import { formSchema, ProjectFormSchema } from "./projectFormValidation";
 import { addProject } from "@/app/dashboard/actions";
 import { useRouter } from "next/navigation";
 import CustomFromField from "@/components/CustomFromField";
-import { FormFieldType } from "@/app/types";
+import { FormFieldType } from "@/app/types/formField";
 
 const AddProjectForm = ({ onSuccess }: { onSuccess: () => void }) => {
   const router = useRouter();

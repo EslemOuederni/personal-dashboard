@@ -8,6 +8,7 @@ export default async function UserProjects (): Promise<IProject[] | undefined> {
   try {
     const session = await auth();
     const userId = session?.user?.id;
+    console.log("userid", userId)
     if (!userId) {
       console.error("User not authenticated.");
     }
@@ -16,6 +17,9 @@ export default async function UserProjects (): Promise<IProject[] | undefined> {
       `http://localhost:3000/api/project/by-user?userId=${userId}`,
       {
         cache: "no-store",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
     );
 

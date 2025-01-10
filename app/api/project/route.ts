@@ -20,8 +20,29 @@ export async function POST (req: Request) {
   try {
     await db();
     const body: IProject = await req.json();
-    const project = await Project.create(body);
-    return NextResponse.json(project, { status: 201 });
+    const { name, startDate, endDate, tag, userId } = body;
+
+    if (!userId) {
+      return NextResponse.json(
+        { message: "User ID is required to create a project." },
+        { status: 400 }
+      );
+    }
+    console.log("userID:", body.userId);
+    const findUser = await User.findById(body.userId);
+
+    if (!findUser) {
+      return NextResponse.json({ message: "User not found." }, { status: 404 });
+    }
+
+    const newProject = await Project.create({
+      name,
+      startDate,
+      endDate,
+      tag,
+      userId,
+    });
+    return NextResponse.json(newProject, { status: 201 });
   } catch (error) {
     return NextResponse.json({ message: error }, { status: 500 });
   }
