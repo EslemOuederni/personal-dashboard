@@ -28,6 +28,7 @@ export default async function Page ({
                         <TableHead>Project Name</TableHead>
                         <TableHead className="w-[100px]">Start Date</TableHead>
                         <TableHead>End Date</TableHead>
+                        <TableHead>Total Time Spent</TableHead>
                         <TableHead>Tag</TableHead>
                         <TableHead>Status</TableHead>
                         <TableHead>Tasks Number</TableHead>
@@ -38,6 +39,7 @@ export default async function Page ({
                         <TableCell className="font-medium">{project.name}</TableCell>
                         <TableCell className="font-medium">{formatDate(project.startDate)}</TableCell>
                         <TableCell>{formatDate(project.endDate)}</TableCell>
+                        <TableCell>{project.totalTimeSpent}</TableCell>
                         <TableCell>{project?.tag}</TableCell>
                         <TableCell>{project.status}</TableCell>
                         <TableCell className="text-center">{project.tasks?.length}</TableCell>
