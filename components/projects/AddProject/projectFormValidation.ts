@@ -15,7 +15,7 @@ export const formSchema = z
         typeof val === "string" || val instanceof Date ? new Date(val) : val,
       z.date()
     ),
-    tag: z.string().optional(),
+    tag: z.array(z.string()).optional(),
   })
   .refine(
     (data) => {

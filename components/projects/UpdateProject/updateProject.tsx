@@ -6,8 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UpdateProject } from "@/app/dashboard/actions";
 import { useRouter } from "next/navigation";
 import CustomFromField from "@/components/CustomFromField";
-import { FormFieldType } from "@/app/types/formField";
-import { IProject } from '@/app/types/project';
+import { FormFieldType } from "@/types/formField";
+import { IProject } from '@/types/project';
 import { formSchema, ProjectFormSchema } from '../AddProject/projectFormValidation';
 
 const UpdateProjectForm = ({ onSuccess, initialData }: { onSuccess: () => void, initialData: IProject }) => {

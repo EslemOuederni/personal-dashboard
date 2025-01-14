@@ -1,6 +1,6 @@
 "use server";
 import { auth } from "@/lib/auth";
-import { IProject } from "../types/project";
+import { IProject } from "../../types/project";
 import { z } from "zod";
 import { ProjectFormSchema } from "@/components/projects/AddProject/projectFormValidation";
 
@@ -34,7 +34,7 @@ export default async function UserProjects (): Promise<IProject[] | undefined> {
 export async function getProjectById (projectId: string) {
   try {
     const res = await fetch(`${process.env.URL}/api/project/${projectId}`, {
-      cache: "force-cache",
+      cache: "no-store",
     });
 
     if (!res.ok) {
@@ -162,3 +162,18 @@ export async function UpdateProject (projectId: string, formData: ProjectFormSch
     console.log(error)
   }
 }
+
+export async function updateProjectTime (projectId: string, startTime: Date, duration: number) {
+  try {
+    const response = await fetch(`${process.env.URL}/api/project/${projectId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ startTime, duration }),
+    });
+
+    if (!response.ok) throw new Error("Failed to update project time");
+    console.log("Project time updated successfully");
+  } catch (error) {
+    console.error("Error updating project time:", error);
+  }
+};

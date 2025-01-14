@@ -1,5 +1,5 @@
 import Project from "@/models/project";
-import { IProject } from "@/app/types/project";
+import { IProject } from "@/types/project";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import mongoose from "mongoose";

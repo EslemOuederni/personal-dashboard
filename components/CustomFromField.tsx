@@ -11,7 +11,7 @@ import { Control } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { CalendarPlus } from "lucide-react";
-import { FormFieldType } from '@/app/types/formField';
+import { FormFieldType } from '@/types/formField';
 interface CustomProps {
   control: Control<any>;
   fieldType: FormFieldType;

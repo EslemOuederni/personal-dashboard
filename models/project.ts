@@ -1,5 +1,5 @@
 import { Schema, model, models } from "mongoose";
-import { IProject } from "../app/types/project";
+import { IProject } from "../types/project";
 import { db } from "@/lib/db";
 
 const ProjectSchema = new Schema<IProject>({
@@ -11,10 +11,29 @@ const ProjectSchema = new Schema<IProject>({
     enum: ["not started", "in-progress", "completed"],
     default: "not started",
   },
-  tag: { type: String },
+  tag: [{ type: String }],
   tasks: [{ type: Schema.Types.ObjectId, ref: "Task" }],
   userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
-});
+  // Time tracking fields
+  totalTimeSpent: { type: Number, default: 0 }, // Total time spent in seconds
+  timeLogs: [
+    {
+      startTime: { type: Date, required: true },
+      endTime: { type: Date },
+      duration: { type: Number, required: true }, // Duration in seconds
+    },
+  ],
+  dailyTimeSpent: [
+    {
+      date: { type: String, required: true }, // ISO date string
+      timeSpent: { type: Number, default: 0 }, // Time spent in seconds
+    },
+  ],
+  // Nested projects
+  parentProjectId: { type: Schema.Types.ObjectId, ref: "Project" },
+},
+  { timestamps: true }
+);
 
 const Project = models.Project || model<IProject>("Project", ProjectSchema);
 export default Project;
