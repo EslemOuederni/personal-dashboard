@@ -3,9 +3,9 @@ import { useForm } from "react-hook-form";
 import { Form } from "@/components/ui/form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UpdateProject } from "@/app/dashboard/actions";
+import { UpdateProject } from "@/app/(main)/dashboard/actions";
 import { useRouter } from "next/navigation";
-import CustomFromField from "@/components/CustomFromField";
+import CustomFromField from "@/components/shared/CustomFormField";
 import { FormFieldType } from "@/types/formField";
 import { IProject } from '@/types/project';
 import { formSchema, ProjectFormSchema } from '../AddProject/projectFormValidation';

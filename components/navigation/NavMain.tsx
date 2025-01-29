@@ -5,8 +5,8 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "./ui/sidebar";
-import { items } from "@/app/constants/constant";
+} from "../ui/sidebar";
+import { items } from "@/lib/constant";
 import { useState } from "react";
 import Link from "next/link";
 

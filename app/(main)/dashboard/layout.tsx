@@ -1,11 +1,11 @@
 import { Metadata } from "next";
-import NavBar from "@/components/Navbar";
+import NavBar from "@/components/navigation/Navbar";
 import {
     SidebarInset,
     SidebarProvider,
     SidebarTrigger,
 } from "@/components/ui/sidebar";
-import Header from "@/components/Header";
+import Header from "@/components/navigation/Header";
 import { auth } from '@/lib/auth';
 import { SessionProvider } from 'next-auth/react';
 

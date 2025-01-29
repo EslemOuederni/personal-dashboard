@@ -1,5 +1,5 @@
 "use client"
-import { deleteProject } from '@/app/dashboard/actions';
+import { deleteProject } from '@/app/(main)/dashboard/actions';
 import { Button } from '../ui/button';
 import { useRouter } from 'next/navigation';
 

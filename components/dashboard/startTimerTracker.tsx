@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from '../ui/button';
 import { PauseIcon, PlayIcon, StopCircleIcon } from 'lucide-react';
-import UserProjects, { getProjects, updateProjectTime } from '@/app/dashboard/actions';
+import UserProjects, { getProjects, updateProjectTime } from '@/app/(main)/dashboard/actions';
 
 type TimerState = "stopped" | "running" | "paused";
 
@@ -52,8 +52,10 @@ const StartTimerTracker = () => {
     const handleStart = () => {
         if (!selectedProjectId) {
             alert("please select a project")
+        } else {
+            setTimerState("running")
         }
-        setTimerState("running")
+
     }
 
     const handlePause = () => {

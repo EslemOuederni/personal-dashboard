@@ -5,12 +5,12 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import { Button } from "./ui/button";
+} from "../ui/dropdown-menu";
+import { Button } from "../ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronDownIcon, EllipsisVertical } from "lucide-react";
-import { SidebarTrigger } from "./ui/sidebar";
+import { SidebarTrigger } from "../ui/sidebar";
 import { auth, signOut } from '@/lib/auth';
 
 const Header = async () => {

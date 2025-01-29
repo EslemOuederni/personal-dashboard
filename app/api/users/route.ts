@@ -1,9 +1,9 @@
-import { db } from "@/lib/db";
+import { db } from "@/lib/mongoose/db";
 import User from "@/models/user";
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET () {
   try {
     await db();
     const users = await User.find();

@@ -2,7 +2,7 @@ import Project from "@/models/project";
 import Task from "@/models/task";
 import { ITask } from "@/types/task";
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db";
+import { db } from "@/lib/mongoose/db";
 
 export async function GET () {
   try {

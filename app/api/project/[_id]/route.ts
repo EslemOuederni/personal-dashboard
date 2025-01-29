@@ -1,7 +1,7 @@
 import Project from "@/models/project";
 import { IProject } from "@/types/project";
 import { NextResponse, NextRequest } from "next/server";
-import { db } from "@/lib/db";
+import { db } from "@/lib/mongoose/db";
 
 export async function GET (
   req: NextRequest,

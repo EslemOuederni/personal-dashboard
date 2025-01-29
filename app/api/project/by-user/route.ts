@@ -1,4 +1,4 @@
-import { db } from '@/lib/db';
+import { db } from '@/lib/mongoose/db';
 import Project from '@/models/project';
 import User from '@/models/user';
 import mongoose from 'mongoose';

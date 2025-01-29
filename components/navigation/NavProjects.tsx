@@ -12,11 +12,11 @@ import {
   SidebarMenuSubItem,
   SidebarMenuSubButton,
   SidebarGroupLabel,
-} from "./ui/sidebar";
+} from "../ui/sidebar";
 
 import Link from "next/link";
-import CreateProject from './projects/AddProject/projectModal';
-import UserProjects from '@/app/dashboard/actions';
+import CreateProject from '../projects/AddProject/projectModal';
+import UserProjects from '@/app/(main)/dashboard/actions';
 
 const NavProjects = async () => {
   const project = await UserProjects();

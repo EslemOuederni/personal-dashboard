@@ -1,6 +1,6 @@
 import { Schema, model, models } from "mongoose";
 import { IProject } from "../types/project";
-import { db } from "@/lib/db";
+import { db } from "@/lib/mongoose/db";
 
 const ProjectSchema = new Schema<IProject>({
   name: { type: String, required: true },

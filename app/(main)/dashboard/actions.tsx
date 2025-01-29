@@ -1,6 +1,6 @@
 "use server";
 import { auth } from "@/lib/auth";
-import { IProject } from "../../types/project";
+import { IProject } from "../../../types/project";
 import { z } from "zod";
 import { ProjectFormSchema } from "@/components/projects/AddProject/projectFormValidation";
 

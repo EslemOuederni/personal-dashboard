@@ -1,7 +1,7 @@
 import Project from "@/models/project";
 import { IProject } from "@/types/project";
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db";
+import { db } from "@/lib/mongoose/db";
 import mongoose from "mongoose";
 import User from "@/models/user";
 import { formSchema } from "@/components/projects/AddProject/projectFormValidation";

@@ -5,8 +5,8 @@ import {
   SidebarContent,
   SidebarHeader,
 } from "@/components/ui/sidebar";
-import NavMain from './nav-main';
-import NavProjects from './nav-projects';
+import NavMain from './NavMain';
+import NavProjects from './NavProjects';
 
 export const dynamic = 'force-dynamic'
 

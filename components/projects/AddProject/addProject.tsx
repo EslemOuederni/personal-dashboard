@@ -4,9 +4,9 @@ import { Form, FormControl } from "@/components/ui/form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formSchema, ProjectFormSchema } from "./projectFormValidation";
-import { addProject } from "@/app/dashboard/actions";
+import { addProject } from "@/app/(main)/dashboard/actions";
 import { useRouter } from "next/navigation";
-import CustomFromField from "@/components/CustomFromField";
+import CustomFromField from "@/components/shared/CustomFormField";
 import { FormFieldType } from "@/types/formField";
 
 const AddProjectForm = ({ onSuccess }: { onSuccess: () => void }) => {
